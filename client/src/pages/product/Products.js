@@ -40,7 +40,8 @@ const Products = () => {
                   <Card>
                     <Card.Img onClick={()=>viewProduct(value._id)}
                       variant="top"
-                      src="https://img.freepik.com/free-photo/pink-headphones-wireless-digital-device_53876-96804.jpg"
+                      height="150px"
+                      src={`http://localhost:8000/public/products/${value.image}`}
                     />
                     <Card.Body>
                       <Card.Title onClick={()=>viewProduct(value._id)}>{value.name}</Card.Title>
