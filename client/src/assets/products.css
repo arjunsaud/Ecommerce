@@ -1,0 +1,17 @@
+.productlist{
+    margin-top: 10px;
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.filtersection{
+    width: 100%;
+    background-color: aqua;
+    flex-shrink: 3;
+}
+
+.productsection{
+    width: 100%;
+    flex-grow: 7;
+    background-color: blue;
+}

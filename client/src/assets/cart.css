@@ -1,0 +1,155 @@
+.card{
+  margin: auto;
+  max-width: 950px;
+  width: 90%;
+  padding: 10px;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 1rem;
+  margin-bottom: 10px;
+  border: transparent;
+}
+@media(max-width:767px){
+  .card{
+      margin: 3vh auto;
+  }
+}
+.cart{
+  background-color: #fff;
+  padding: 4vh 5vh;
+  border-bottom-left-radius: 1rem;
+  border-top-left-radius: 1rem;
+}
+@media(max-width:767px){
+  .cart{
+      padding: 4vh;
+      border-bottom-left-radius: unset;
+      border-top-right-radius: 1rem;
+  }
+}
+.summary{
+  background-color: rgb(34, 34, 34);
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  padding: 4vh;
+  color: rgb(65, 65, 65);
+}
+@media(max-width:768px){
+  .summary{
+  border-top-right-radius: unset;
+  border-bottom-left-radius: 1rem;
+  }
+}
+.summary .col-2{
+  padding: 0;
+}
+.summary .col-10
+{
+  padding: 0;
+}.row{
+  margin: 0;
+}
+.title b{
+  font-size: 1.5rem;
+}
+.main{
+  margin: 0;
+  padding: 2vh 0;
+  width: 100%;
+}
+.col-2, .col{
+  padding: 0 1vh;
+}
+a{
+  padding: 0 1vh;
+}
+.close{
+  margin-left: auto;
+  font-size: 1rem;
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+}
+.imge{
+  width: 3.5rem;
+}
+.back-to-shop{
+  margin-top: 4.5rem;
+}
+h5{
+  margin-top: 4vh;
+}
+hr{
+  margin-top: 1.25rem;
+}
+form{
+  padding: 2vh 0;
+}
+select{
+  border: 1px solid rgba(0, 0, 0, 0.137);
+  padding: 1.5vh 1vh;
+  margin-bottom: 4vh;
+  outline: none;
+  width: 100%;
+  background-color: rgb(247, 247, 247);
+}
+input{
+  border: 1px solid rgba(0, 0, 0, 0.137);
+  padding: 1vh;
+  margin-bottom: 4vh;
+  outline: none;
+  width: 100%;
+  background-color: rgb(247, 247, 247);
+}
+input:focus::-webkit-input-placeholder
+{
+    color:transparent;
+}
+a{
+  color: black; 
+}
+a:hover{
+  color: black;
+  text-decoration: none;
+}
+
+.incbtn{
+  background-color: rgb(18, 19, 19);
+  width: 30px;
+  color: rgb(255, 255, 255);
+  margin-left: 10px;
+  border-radius: 5px;
+  margin-top: 2px;
+  height: 30px;
+  font-weight: bold;
+}
+.decbtn{
+  background-color: rgb(8, 8, 8);
+  width: 30px;
+  margin-top: 2px;
+  height: 30px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.lists{
+  font-size: 20px;
+  width: 50px;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  border: 2px solid black;
+}
+
+.incbtn:hover{
+  background-color: blue;
+}
+
+.decbtn:hover{
+  background-color: yellow;
+}
+
+.btns{
+  display: flex;
+}

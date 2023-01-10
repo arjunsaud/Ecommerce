@@ -1,0 +1,29 @@
+.link{
+    text-decoration: none;
+}
+.footer-link{
+    text-decoration: none;
+    font-size: 14px;
+    color: rgb(143, 141, 141);
+}
+p,.footer-copyright{
+    color: rgb(133, 130, 130);
+}
+h6{
+    color: rgb(255, 255, 255); 
+}
+
+footer{
+    background-color: #131A22;
+}
+.itemsfooter{
+    display: flex;
+    justify-content: center;
+}
+@media (max-width: 768px) {
+    .itemsfooter{
+        flex-direction: column;
+        justify-content: center;
+    }
+
+}

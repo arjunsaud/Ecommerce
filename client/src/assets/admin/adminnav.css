@@ -1,0 +1,33 @@
+.sidenavbar{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.sideham{
+    display: none;
+}
+.topbar{
+    background-color: rgb(36, 61, 78);
+}
+.sidelogo{
+    flex-grow: 0.9;
+    color: white;
+}
+.sidemenu{
+    display: flex;
+    flex-direction: row;
+}
+.sidemenulist{
+    background-color: rgb(56, 20, 54);
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+}
+.asidemenulink{
+    text-decoration: none;
+    color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 5px;
+    font-size: 20px;
+}

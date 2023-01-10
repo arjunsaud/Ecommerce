@@ -1,0 +1,166 @@
+/* head starts */
+.head{
+  padding: 5px;
+    background-color: black;
+    color: white;
+}
+.head i {
+    margin-right: 10px;
+  }
+  .head label {
+    margin-right: 30px;
+    font-size: 16px;
+}
+
+/* head ends */
+
+
+/* hader search start */
+.search {
+  margin-top: 10px;
+  padding: 10px;
+}
+.searchbtn{
+  cursor: pointer;
+}
+.topbar{
+  display: flex;
+  width: 100%;
+  background-color: white;
+  justify-content: space-between;
+}
+
+.logo{
+  margin-bottom: 10px;
+}
+  .logo span {
+    width: auto;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .searchbox{
+    border-radius: 20px;
+  }
+  .searchinput{
+    margin-top: .1px;
+    margin-bottom: .1px;
+  }
+.icon{
+  display: flex;
+  font-size: 24px;
+}
+.icon span{
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+/* search ends */
+
+/* navbar */
+header {
+  padding-bottom: 20px;
+  box-shadow: -1px 15px 17px -8px rgba(0, 0, 0, 0.1);
+}
+.toggle{
+  float: right;
+}
+.hamburger{
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.links{
+  display: flex;
+  justify-content: center;
+}
+.link {
+  color: black;
+  margin-left: 20px;
+  text-decoration: none;
+  transition: 0.5s;
+  font-size: 16px;
+  font-weight: 400;
+}
+.link:hover {
+  color: #ff014f;
+}
+.open {
+  display: none;
+}
+.authbutton{
+  margin-top: -6px;
+  display: flex;
+  justify-content: center;
+}
+.authbutton button{
+  margin: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  background-color: #e94173;
+}
+.cartbutton{
+  position: relative;
+}
+.cartNotify{
+  background-color: rgb(209, 0, 0);
+  height: 25px;
+  position: absolute;
+  width: 25px;
+  color: white;
+  padding-left:7px;
+  font-size: 16px;
+  font-weight: bolder;
+  top: 2px;
+  right: -12px;
+  border-radius: 50%;
+}
+
+@media (max-width: 992px) {
+  .authbutton{
+    margin-top: 10px;
+  }
+  .cartNotify{
+    position: absolute;
+    top: 2px; 
+    padding-left:0px;
+    right: -10px;
+  }
+  .topbar{
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .nav-links-mobile {
+    display: flex;
+    margin-top: 10px;
+    text-align: center;
+    flex-direction: column;
+    list-style: none;
+    transition: all 0.5s ease-in-out;
+  }
+  .link {
+    transition: all 0.5s ease-in-out;
+    text-transform: uppercase;
+    line-height: 40px;
+  }
+  .links {
+    display: none;
+  }
+  .close,
+  .open {
+    display: block;
+    font-size: 25px;
+  }
+  .close{
+    float:right;
+  }
+  .header.active {
+    height: 10vh;
+  }
+  .icon{
+    font-size: 28px;
+    justify-content: center;
+    margin-top: 10px;
+  }
+}
+
+

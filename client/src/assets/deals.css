@@ -1,0 +1,78 @@
+
+/* new arrivals */
+.NewArrivals{
+  padding: 20px;
+}
+.NewArrivals h4 {
+    font-weight: 400;
+  }
+  .NewArrivals span {
+    color: #e94560;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .boxNew{
+    margin: 5px 10px;
+    height: 200px;
+    background-color: #e94560;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+.boxNew{
+  height: 100px;
+  width: 100px;
+  object-fit: fill;
+}
+
+/* newarrivals ends */
+
+
+/* for you  */
+.cardSection{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 40px;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+}
+.cardSection span{
+  color: black;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 4px;
+  border: 2px solid rgb(207, 86, 126);
+}
+.cardSection span:hover{
+  background-color: rgb(197, 23, 10);
+  color: white;
+}
+
+.catecards:hover{
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #e94560;
+}
+
+.produc{
+  cursor: pointer;
+}
+
+
+.produc {
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 6px 0 rgba(22, 22, 26, 0.18);
+  border-radius: 0;
+  border: 0;
+  margin-bottom: 1.5em;
+}
+.produc:hover {
+  transform: scale(1.1);
+}
