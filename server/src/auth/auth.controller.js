@@ -42,6 +42,24 @@ const AuthController = {
       user,
     });
   },
+
+  userme: async (req, res) => {
+    try {
+      const { user } = req;
+      if(user.role==="user"){
+        return res.status(200).json({
+          user
+        });
+      }else{
+        return res.status(201).json({
+          message:"Not Logged In"
+      })
+      }
+    } catch (error) {
+      throw error
+    }
+  },
+
   refresh_token: (req, res) => {
     const { token, refreshToken } = req.tokens;
     return res.status(200).json({

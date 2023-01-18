@@ -1,0 +1,125 @@
+.chatmain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.chat{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:50%;    
+    border-radius: 10px;
+    border: 0px solid white;
+    background-color: rgb(54, 73, 73);
+    flex-direction: column;
+    margin: 10px;
+}
+
+@media screen and (max-width:850px) {
+    .chat{
+        width: 90%;
+    }   
+}
+
+@media screen and (max-width:1100px) {
+    .chat{
+        width: 60%;
+    }   
+}
+@media screen and (max-width:760px) {
+    .chat{
+        width: 80%;
+    }   
+}
+@media screen and (max-width:600px) {
+    .chat{
+        width: 90%;
+    }   
+}
+
+.profilesection{
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    height: 60px;
+    width: 100%;
+    flex-direction: row;
+    background-color: rgb(7, 52, 175);
+}
+
+.profilesection img{
+    height: 50px;
+    width: 50px;
+    object-fit:cover ;
+    border-radius: 50%;
+}
+.profilesection div{
+    margin-left: 10px;
+}
+
+.topsection{
+    display: flex;
+    flex-direction: column;
+}
+.topsection label{
+    font-weight: bold;
+    font-size: 22px;
+    margin-top: -2px;
+}
+
+.topsection span{
+    opacity: .6;
+    line-height: 10px;
+}
+
+.chatbox{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    height: 50vh;
+    overflow-y:scroll;
+    flex-direction: column;
+}
+
+.receiver{
+    display: flex;
+    margin: 10px;
+}
+.receiver img{
+    height: 40px;
+    width: 40px;
+    object-fit:cover ;
+    border-radius: 50%;
+}
+.messagereceiver{
+    width: 100%;
+    margin-left: 5px;
+    margin-right: 40px;
+    background-color: rgb(42, 42, 43);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.sender{
+    margin: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+.sender img{
+    height: 40px;
+    width: 40px;
+    object-fit:cover;
+    border-radius: 50%;
+}
+.messagesender{
+    margin-right: 10px;
+    margin-left: 40px;
+    background-color: rgb(0, 3, 173);
+    border-radius: 10px;
+    padding: 10px;
+}
+.messagesection input{
+    margin-right: 1px;
+}

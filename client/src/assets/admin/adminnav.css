@@ -19,9 +19,13 @@
 }
 .sidemenulist{
     background-color: rgb(56, 20, 54);
-    height: 95vh;
+    height: 100vh;
     display: flex;
+    width: fit-content;
     flex-direction: column;
+}
+.outletsection{
+    width:100%;
 }
 .asidemenulink{
     text-decoration: none;

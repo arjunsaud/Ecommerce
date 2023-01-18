@@ -29,11 +29,14 @@ const AdminNav = () => {
           <Link className="asidemenulink" to="/admin/profile">
             Profile
           </Link>
+          <Link className="asidemenulink" to="/admin/customercare">
+            Messages
+          </Link>
           <Link className="asidemenulink text-danger" onClick={() => logout()}>
             Logout <FiLogOut />
           </Link>
         </div>
-        <div>
+        <div className="outletsection">
           <Outlet />
         </div>
       </div>

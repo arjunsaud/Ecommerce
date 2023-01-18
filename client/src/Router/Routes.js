@@ -20,6 +20,7 @@ import Contact from "../pages/page/Contact";
 import CustomeService from "../pages/page/CustomeService";
 import About from "../pages/page/About";
 import ProductsByCategory from "../pages/product/ProductsByCategory";
+import UsersChat from "../pages/admin/UsersChat"
 
 export const Router = createBrowserRouter([
   {
@@ -99,6 +100,10 @@ export const Router = createBrowserRouter([
       {
         path:"/admin/editproduct",
         element:<EditProduct/>
+      },
+      {
+        path:"/admin/customercare",
+        element:<UsersChat/>
       }
     ]
   },

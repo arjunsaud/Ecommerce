@@ -75,7 +75,7 @@ const Search = () => {
                   <Col
                     className="produc"
                     key={value._id}
-                    xs={9} sm={7} md={4} lg={3} xl={2} xxl={2}
+                    xs={2} sm={7} md={4} lg={3} xl={2} xxl={6}
                   >
                     <Card height="100%">
                       <Card.Img

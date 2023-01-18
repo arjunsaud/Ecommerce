@@ -4,38 +4,38 @@ import styled from "styled-components"
 const Contact = () => {
   return (
     <Wrapper>
-      <div class="wrapper">
-        <div class="overlay">
-          <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-md-9">
-              <div class="contact-us text-center">
+      <div className="wrapper">
+        <div className="overlay">
+          <div className="row d-flex justify-content-center align-items-center">
+            <div className="col-md-9">
+              <div className="contact-us text-center">
                 <h3>Contact Us</h3>
-                <p class="mb-5">
+                <p className="mb-5">
                 Are easy to find, so a visitor can quickly get in touch with you.
                 </p>
-                <div class="row d-flex justify-content-center">
-                  <div class="col-md-6">
-                    <div class="text-center px-1">
-                      <div class="forms p-4 py-5 bg-white">
+                <div className="row d-flex justify-content-center">
+                  <div className="col-md-6">
+                    <div className="text-center px-1">
+                      <div className="forms p-4 py-5 bg-white">
                         <h5>Send Message</h5>
-                        <div class="mt-4 inputs">
+                        <div className="mt-4 inputs">
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             placeholder="Name"
                           />
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             placeholder="Email"
                           />
                           <textarea
-                            class="form-control"
+                            className="form-control"
                             placeholder="Type your message"
                           ></textarea>
                         </div>
-                        <div class="button mt-4 text-left">
-                          <button class="btn btn-dark">Send</button>
+                        <div className="button mt-4 text-left">
+                          <button className="btn btn-dark">Send</button>
                         </div>
                       </div>
                     </div>

@@ -21,8 +21,10 @@ const Search = () => {
   useEffect(() => {
     if (role==="user") {
       setIsLogged(true);
+    }else{
+      setIsLogged(false)
     }
-  }, []);
+  }, [role]);
 
   const navigate = useNavigate();
 
@@ -43,6 +45,12 @@ const Search = () => {
   }
   const goToPofile=()=>{
     navigate("/profile")
+  }
+
+
+  const handleLogout=()=>{
+    logout()
+    navigate("/login")
   }
 
   return (
@@ -69,7 +77,7 @@ const Search = () => {
               <BsCart3 />
               <label style={{cursor:"pointer"}} onClick={goToCart} className="cartNotify">{cart.length>0?cart.length:"0"}</label>
             </span>
-            <span style={{cursor:"pointer"}} onClick={logout}>
+            <span style={{cursor:"pointer"}} onClick={handleLogout}>
               <FiLogOut color="red" />
             </span>
           </div>

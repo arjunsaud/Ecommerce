@@ -11,6 +11,9 @@ authRouter.post("/register",AuthController.register)
 authRouter.post("/refresh_token",generateTokens,AuthController.refresh_token)
 authRouter.get("/me",verifyUser,AuthController.me)
 
+authRouter.get("/userme",verifyUser,AuthController.userme)
+
+
 authRouter.post("/updatedetails",verifyUser,AuthController.updatedetails)
 
 

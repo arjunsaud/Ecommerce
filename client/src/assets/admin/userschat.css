@@ -1,0 +1,93 @@
+.mainsec{
+    display: flex;
+    justify-content: center;
+}
+.usersmain{
+    display: flex;
+    height: 90vh;
+    margin: 10px;
+    background-color: rgb(34, 33, 33);
+    width: 60%;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+@media screen and (max-width:850px) {
+    .usersmain{
+        width: 90%;
+    }   
+}
+
+@media screen and (max-width:1250px) {
+    .usersmain{
+        width: 80%;
+    }   
+}
+
+
+.users{
+    border-right: 3px solid white;
+}
+.message{
+    width: 100%;
+    position: relative;
+}
+
+.searchuser{
+    margin: 10px;
+}
+
+.userslist{
+    background-color: azure;
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.userlistdetails{
+    display: flex;
+    flex-direction: column;
+}
+.userlistdetails label{
+    opacity: .6;
+    font-size: 14px;
+    font-weight: bolder;
+}
+.userslist img{
+    height: 50px;
+    width: 50px;
+    margin-right: 10px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user{
+    border-bottom: 3px solid white;
+}
+
+.user img{
+    height: 50px;
+    width: 50px;
+    margin: 14px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.usermessages{
+    height: 69.3vh;
+}
+
+.userchatbox{
+    margin: 10px;
+    overflow-y:scroll;
+    height: 100%;
+}
+
+.sendmessage{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}

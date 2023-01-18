@@ -4,10 +4,15 @@ import { Input, Div, Form } from "../../styled/styled.components";
 import { Button } from "../../styled/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import api from "axios";
 import { object, string } from "yup";
 import axios from "../../config/axios";
 import { useDispatch } from "react-redux";
 import { setAuthDetails } from "../../slices/auth.slice";
+import { setChatDetails } from "../../slices/chat.slice";
+
+
+const url = "http://localhost:8001/";
 
 const initialValues = {
   email: "",
@@ -22,17 +27,27 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: async (values, action) => {
       const response = await axios.post("auth/login", { ...values });
+      if (response.status === 200) {
+        const resp = await api.post(url + "user/createuser", {
+          userid: response.data.data.user._id,
+          email: response.data.data.user.email,
+          role: response.data.data.user.role,
+        });
+      }
       const user = {
         email: response.data.data.user.email,
         bearer_token: response.data.data.token,
         refresh_token: response.data.data.refreshToken,
         role: response.data.data.user.role,
+        userid: response.data.data.user._id,
       };
       dispatch(setAuthDetails(user));
       if (response.status === 200) {
         if (response.data.data.user.role === "admin") {
           navigate("/admin");
         } else {
+          const {data} = await api.get(url + "user/customersupport");
+          dispatch(setChatDetails({adminuser:data.user.userid}))
           navigate("/");
         }
       }

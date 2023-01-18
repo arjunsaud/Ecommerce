@@ -6,7 +6,8 @@ export const authSlice = createSlice({
       email: "",
       bearer_token: "",
       refresh_token: "",
-      role: ""
+      role: "",
+      userid:""
   },
   reducers: {
     setAuthDetails: (state, {payload}) => {
@@ -14,12 +15,14 @@ export const authSlice = createSlice({
       state.bearer_token = payload.bearer_token;
       state.refresh_token = payload.refresh_token;
       state.role = payload.role;
+      state.userid=payload.userid
     },
     resetAuthDetails: (state, { payload }) => {
       state.email = "";
       state.bearer_token = "";
       state.refresh_token = "";
       state.role = "";
+      state.userid="";
     },
   },
 });

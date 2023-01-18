@@ -26,7 +26,7 @@ class UserService {
 
   async searchUsers(filters) {
     try {
-      const products = await this.User.find({ ...filters,$and: [{ role: { $ne: "ADMIN" } }],
+      const products = await this.User.find({ ...filters,$and: [{ role: { $ne: "admin" } }],
     });
       return products;
     } catch (error) {
