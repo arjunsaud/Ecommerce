@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import api from "axios";
 import Messages from "./Messages";
 import { BiSend } from "react-icons/bi";
 import { toast } from "react-toastify";
-
+import { setMessage } from "../../slices/chat.slice";
 
 const url = "http://localhost:8001/";
 
@@ -12,6 +12,7 @@ const Chat = ({ current }) => {
   const { userid } = useSelector((state) => {
     return state.auth;
   });
+
   const [cid, setCid] = useState();
   const createconv = async () => {
     const { data } = await api.get(
@@ -33,7 +34,7 @@ const Chat = ({ current }) => {
     <>
       <div className="usermessages">
         <div className="userchatbox">
-          <Messages cid={cid} />
+          {cid ? <Messages cid={cid} /> : "Loading"}
         </div>
       </div>
       {cid ? <Send cid={cid} /> : ""}
@@ -42,23 +43,25 @@ const Chat = ({ current }) => {
 };
 
 const Send = ({ cid }) => {
+  const dispatch = useDispatch();
   const { userid } = useSelector((state) => {
     return state.auth;
   });
-
+  
   const message = useRef();
 
   const handleSend = async (e) => {
     e.preventDefault();
     if (message.current.value !== "") {
-      const resp = await api.post(url + "message", {
+      const { data } = await api.post(url + "message", {
         message: message.current.value,
         conversation: cid,
         sender_id: userid,
       });
+      dispatch(setMessage(data.messages));
       message.current.value = "";
-    }else{
-        toast.warning("Message is Empty")
+    } else {
+      toast.warning("Message is Empty");
     }
   };
   return (

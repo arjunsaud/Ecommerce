@@ -8,7 +8,6 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, { payload }) => {
-      console.log(payload);
       payload.qty=1
       if (state.cart.length !== 0) {
         const check = state.cart.filter((value) => {

@@ -4,7 +4,7 @@ export const chatSlice = createSlice({
   name: "chat",
   initialState: {
       adminuser: "",
-      conversation:""
+      message:{},
   },
   reducers: {
     setChatDetails: (state, {payload}) => {
@@ -13,14 +13,14 @@ export const chatSlice = createSlice({
     resetChatDetails: (state, { payload }) => {
       state.adminuser = "";
     },
-    setConversationId:(state,{payload})=>{
-        state.conversation=payload.conversation
+    setMessage:(state,{payload})=>{
+      return { message: {...payload} };
     },
-    resetConversationId:(state,{payload})=>{
-        state.conversation=""
-    }
+    resetMessage:(state,{payload})=>{
+      return { message: {} };
+    },
   },
 });
 
-export const { setChatDetails, resetChatDetails,setConversationId,resetConversationId} = chatSlice.actions;
+export const { setChatDetails, resetChatDetails,setMessage,resetMessage} = chatSlice.actions;
 export default chatSlice.reducer;

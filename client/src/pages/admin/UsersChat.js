@@ -3,22 +3,46 @@ import api from "axios";
 import "../../assets/admin/userschat.css";
 import { GoSearch } from "react-icons/go";
 import profile from "../../assets/profile.jpg";
-import { BiSend } from "react-icons/bi";
 import Chat from "./Chat";
+import { setMessage } from "../../slices/chat.slice";
+import { useDispatch, useSelector } from "react-redux";
 
 const url = "http://localhost:8001/";
 
 const UsersChat = () => {
 
+  const { userid } = useSelector((state) => {
+    return state.auth;
+  });
+
+  const [socket,setSocket]=useState()
   const [current, setCurrent] = useState();
+  const dispatch=useDispatch()
+
   const [clientUsers, setClientUsers] = useState([]);
   useEffect(() => {
     fetchUsers();
+    connectToSocket()
   },[]);
+
+  const connectToSocket=()=>{
+    const ws=new WebSocket(`ws://localhost:8001?userid=${userid}`)
+    setSocket(ws)
+  }
+
+
+  socket?.addEventListener('open' , () => console.log("Socket connected"))
+  socket?.addEventListener('close' , () => console.log("Closed"))
+  socket?.addEventListener('message' , (event) => {
+    const newMessage = JSON.parse(event.data)
+    dispatch(setMessage(newMessage))
+  })
+
   const fetchUsers = async () => {
     const { data } = await api.get(`${url}user/getAll`);
     setClientUsers(data.user);
   };
+
 
   const handleSwitch = (value) => {
     setCurrent({ userid: value.userid, email: value.email });
@@ -47,24 +71,22 @@ const UsersChat = () => {
 
         {current ? (
           <div className="message">
-            <h3 className="m-3">Messages</h3>
+            <h3 className="m-3 text-white">Messages</h3>
             <div className="user">
               <img src={profile} />
-              <span>{current.email}</span>
+              <span className="text-white">{current.email}</span>
             </div>
               <Chat current={current} />
           </div>
         ) : (
           <div className="message">
-            <h4 className="m-3">Select User for Conversation</h4>
+            <h4 className="m-3 text-white">Select User for Conversation</h4>
           </div>
         )}
       </div>
     </div>
   );
 };
-
-
 
 const Search = () => {
   return (

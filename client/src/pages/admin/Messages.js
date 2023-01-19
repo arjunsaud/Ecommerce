@@ -6,14 +6,25 @@ import { useSelector } from "react-redux";
 const url = "http://localhost:8001/";
 
 const Messages = ({ cid }) => {
-    const { userid, role, email } = useSelector((state) => {
-        return state.auth;
-      });
-    
+  
+  const { userid } = useSelector((state) => {
+    return state.auth;
+  });
+
+  const { message } = useSelector((state) => {
+    return state.chat;
+  });
+
   const [chats, setChats] = useState([]);
   useEffect(() => {
     fetchChats();
   }, [cid]);
+
+  useEffect(()=>{
+    if(message){
+      setChats((prev)=>[...prev,message])
+    }
+  },[message])
 
   const fetchChats = async () => {
     const { data } = await api.get(`${url}message/${cid}`);
@@ -22,28 +33,30 @@ const Messages = ({ cid }) => {
 
   return (
     <div>
-      {chats.length>0?chats.map((value) => {
-        return (
-          <div key={value._id}>
-            {value.sender_id === userid ? (
-              <div className="sender">
-                <div className="messagesender">{value.message}</div>
-                <img src={profile} alt="profile" />
+      {chats.length > 0
+        ? chats.map((value,index) => {
+            return (
+              <div key={index}>
+                {value.sender_id === userid ? (
+                  <div className="sender">
+                    <div className="messagesender">{value.message}</div>
+                    <img src={profile} alt="profile" />
+                  </div>
+                ) : (
+                  <div>
+                    <div className="receiver">
+                      <img src={profile} alt="profile" />
+                      <div className="messagereceiver">{value.message} </div>
+                    </div>
+                  </div>
+                )}
               </div>
-            ) : (
-              <div>
-                <div className="receiver">
-                  <img src={profile} alt="profile" />
-                  <div className="messagereceiver">{value.message} </div>
-                </div>
-              </div>
-            )}
-          </div>
-        );
-      }):"No Messages Yet"
-    }
+            );
+          })
+        : "No Messages Yet"}
     </div>
   );
 };
+
 
 export default Messages;

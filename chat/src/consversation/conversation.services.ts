@@ -10,9 +10,12 @@ export interface IConversationService {
     sender_id: string,
     receiver_id: string
   ): Promise<IConversation[]>;
+
+  getConversationById(conversation:mongoose.Types.ObjectId):Promise<IConversation[]>;
 }
 
 class ConversationService implements IConversationService {
+
   private _model;
 
   constructor(_model: mongoose.Model<IConversation>) {
@@ -22,7 +25,6 @@ class ConversationService implements IConversationService {
   async createConversation(
     users:String[],
   ): Promise<IConversation> {
-    // console.log(users);
     
     const conversation = await this._model.find({
       users: { $all: [users[0], users[1]] },
@@ -52,6 +54,11 @@ class ConversationService implements IConversationService {
       users: { $all: [sender_id, receiver_id] },
     });
     return message;
+  }
+
+  async getConversationById(conversation:mongoose.Types.ObjectId):Promise<IConversation[]>{
+    const conversations=await this._model.find({_id:conversation})
+    return conversations
   }
 }
 

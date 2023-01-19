@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../assets/customer.css";
 import profile from "../../assets/profile.jpg";
 import { useSelector } from "react-redux";
 import api from "axios";
+import { toast } from "react-toastify";
+
 
 const url = "http://localhost:8001/";
 
 const Chat = ({cid}) => {
+
   const { userid } = useSelector((state) => {
     return state.auth;
   });
+
+  const { message } = useSelector((state) => {
+    return state.chat;
+  });
+
+  console.log(message);
 
   const [chats, setChats] = useState([]);
 
@@ -17,16 +26,24 @@ const Chat = ({cid}) => {
     fetchChats()
   },[])
 
+  useEffect(()=>{
+    if(message){
+      setChats((prev)=>[...prev,message])
+    }
+  },[message])
+
   const fetchChats = async () => {
     const {data} = await api.get(`${url}message/${cid}`);
     setChats(data.message);
   };
 
   return (
+    <div className="chat">
+      <Profile/>
     <div className="chatbox">
-      {chats.map((value) => {
+      {chats.map((value,index) => {
         return (
-          <div key={value._id}>
+          <div key={index}>
             {value.sender_id === userid ? (
               <div className="sender">
                 <div className="messagesender">{value.message}</div>
@@ -43,6 +60,64 @@ const Chat = ({cid}) => {
           </div>
         );
       })}
+    </div>
+    <Send cid={cid} setChats={setChats}/>
+    </div>
+  );
+};
+
+
+const Send = ({ cid,setChats }) => {
+  const { message } = useSelector((state) => {
+    return state.chat;
+  });
+  const { userid } = useSelector((state) => {
+    return state.auth;
+  });
+
+  const msg = useRef();
+
+  const handleSend = async (e) => {
+    e.preventDefault();
+    if (msg.current.value !== "") {
+      const {data} = await api.post(url + "message", {
+        message: msg.current.value,
+        conversation: cid,
+        sender_id: userid,
+      });
+      setChats(prev=>[...prev,data.messages])
+      msg.current.value = "";
+    } else {
+      toast.warning("Message is Empty");
+    }
+  };
+  return (
+    <div className="messagesection input-group">
+      <input
+        type="text"
+        required
+        ref={msg}
+        className="form-control"
+        placeholder="Type Message Here..."
+      />
+      <div className="input-group-append">
+        <button onClick={handleSend} className="input-group-text bg-primary">
+          send
+        </button>
+      </div>
+    </div>
+  );
+};
+
+
+const Profile = () => {
+  return (
+    <div className="profilesection">
+      <img width="50px" src={profile} alt="profile" />
+      <div className="topsection">
+        <label>Customer Service User</label>
+        <span>Customer Support</span>
+      </div>
     </div>
   );
 };
