@@ -1,19 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useContext, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import api from "axios";
 import Messages from "./Messages";
 import { BiSend } from "react-icons/bi";
 import { toast } from "react-toastify";
-import { setMessage } from "../../slices/chat.slice";
+import { AdminSocketContext } from "../../context/AdminSocketContext";
 
 const url = "http://localhost:8001/";
 
-const Chat = ({ current }) => {
+const Chat = () => {
+  const { current, setCid } = useContext(AdminSocketContext);
+
   const { userid } = useSelector((state) => {
     return state.auth;
   });
 
-  const [cid, setCid] = useState();
   const createconv = async () => {
     const { data } = await api.get(
       `${url}conversation/${current.userid}/${userid}`
@@ -34,20 +35,21 @@ const Chat = ({ current }) => {
     <>
       <div className="usermessages">
         <div className="userchatbox">
-          {cid ? <Messages cid={cid} /> : "Loading"}
+          <Messages />
         </div>
       </div>
-      {cid ? <Send cid={cid} /> : ""}
+      <Send />
     </>
   );
 };
 
-const Send = ({ cid }) => {
-  const dispatch = useDispatch();
+const Send = () => {
+  const { cid ,setMessage} = useContext(AdminSocketContext);
+
   const { userid } = useSelector((state) => {
     return state.auth;
   });
-  
+
   const message = useRef();
 
   const handleSend = async (e) => {
@@ -58,7 +60,7 @@ const Send = ({ cid }) => {
         conversation: cid,
         sender_id: userid,
       });
-      dispatch(setMessage(data.messages));
+      setMessage(data.messages);
       message.current.value = "";
     } else {
       toast.warning("Message is Empty");

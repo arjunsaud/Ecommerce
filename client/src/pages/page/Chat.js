@@ -1,76 +1,71 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "../../assets/customer.css";
 import profile from "../../assets/profile.jpg";
 import { useSelector } from "react-redux";
 import api from "axios";
 import { toast } from "react-toastify";
-
+import { SocketContext } from "../../context/SocketContext";
 
 const url = "http://localhost:8001/";
 
-const Chat = ({cid}) => {
+const Chat = () => {
+  const { message, cid } = useContext(SocketContext);
 
   const { userid } = useSelector((state) => {
     return state.auth;
   });
 
-  const { message } = useSelector((state) => {
-    return state.chat;
-  });
-
-  console.log(message);
-
   const [chats, setChats] = useState([]);
 
-  useEffect(()=>{
-    fetchChats()
-  },[])
+  useEffect(() => {
+    fetchChats();
+  }, [cid]);
 
-  useEffect(()=>{
-    if(message){
-      setChats((prev)=>[...prev,message])
+  useEffect(() => {
+    if (message) {
+      setChats((prev) => [...prev, message]);
     }
-  },[message])
+  }, [message]);
 
   const fetchChats = async () => {
-    const {data} = await api.get(`${url}message/${cid}`);
-    setChats(data.message);
+    if (cid) {
+      const { data } = await api.get(`${url}message/${cid}`);
+      setChats(data.message);
+    }
   };
 
   return (
     <div className="chat">
-      <Profile/>
-    <div className="chatbox">
-      {chats.map((value,index) => {
-        return (
-          <div key={index}>
-            {value.sender_id === userid ? (
-              <div className="sender">
-                <div className="messagesender">{value.message}</div>
-                <img src={profile} alt="profile" />
-              </div>
-            ) : (
-              <div>
-                <div className="receiver">
-                  <img src={profile} alt="profile" />
-                  <div className="messagereceiver">{value.message} </div>
+      <Profile />
+      <div className="chatbox">
+        {chats.length > 0
+          ? chats.map((value, index) => {
+              return (
+                <div key={index}>
+                  {value.sender_id === userid ? (
+                    <div className="sender">
+                      <div className="messagesender">{value.message}</div>
+                      <img src={profile} alt="profile" />
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="receiver">
+                        <img src={profile} alt="profile" />
+                        <div className="messagereceiver">{value.message} </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            )}
-          </div>
-        );
-      })}
-    </div>
-    <Send cid={cid} setChats={setChats}/>
+              );
+            })
+          : "Loading"}
+      </div>
+      <Send cid={cid} setChats={setChats} />
     </div>
   );
 };
 
-
-const Send = ({ cid,setChats }) => {
-  const { message } = useSelector((state) => {
-    return state.chat;
-  });
+const Send = ({ cid, setChats }) => {
   const { userid } = useSelector((state) => {
     return state.auth;
   });
@@ -80,12 +75,12 @@ const Send = ({ cid,setChats }) => {
   const handleSend = async (e) => {
     e.preventDefault();
     if (msg.current.value !== "") {
-      const {data} = await api.post(url + "message", {
+      const { data } = await api.post(url + "message", {
         message: msg.current.value,
         conversation: cid,
         sender_id: userid,
       });
-      setChats(prev=>[...prev,data.messages])
+      setChats((prev) => [...prev, data.messages]);
       msg.current.value = "";
     } else {
       toast.warning("Message is Empty");
@@ -108,7 +103,6 @@ const Send = ({ cid,setChats }) => {
     </div>
   );
 };
-
 
 const Profile = () => {
   return (

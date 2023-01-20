@@ -1,52 +1,13 @@
-import React, { useEffect, useState } from "react";
-import api from "axios";
+import React, { useContext } from "react";
 import "../../assets/admin/userschat.css";
 import { GoSearch } from "react-icons/go";
 import profile from "../../assets/profile.jpg";
 import Chat from "./Chat";
-import { setMessage } from "../../slices/chat.slice";
-import { useDispatch, useSelector } from "react-redux";
 
-const url = "http://localhost:8001/";
+import { AdminSocketContext } from "../../context/AdminSocketContext";
 
 const UsersChat = () => {
-
-  const { userid } = useSelector((state) => {
-    return state.auth;
-  });
-
-  const [socket,setSocket]=useState()
-  const [current, setCurrent] = useState();
-  const dispatch=useDispatch()
-
-  const [clientUsers, setClientUsers] = useState([]);
-  useEffect(() => {
-    fetchUsers();
-    connectToSocket()
-  },[]);
-
-  const connectToSocket=()=>{
-    const ws=new WebSocket(`ws://localhost:8001?userid=${userid}`)
-    setSocket(ws)
-  }
-
-
-  socket?.addEventListener('open' , () => console.log("Socket connected"))
-  socket?.addEventListener('close' , () => console.log("Closed"))
-  socket?.addEventListener('message' , (event) => {
-    const newMessage = JSON.parse(event.data)
-    dispatch(setMessage(newMessage))
-  })
-
-  const fetchUsers = async () => {
-    const { data } = await api.get(`${url}user/getAll`);
-    setClientUsers(data.user);
-  };
-
-
-  const handleSwitch = (value) => {
-    setCurrent({ userid: value.userid, email: value.email });
-  };
+  const { clientUsers, current, handleSwitch } = useContext(AdminSocketContext);
 
   return (
     <div className="mainsec">
@@ -57,7 +18,11 @@ const UsersChat = () => {
           <div className="allusers">
             {clientUsers.map((value) => {
               return (
-                <div key={value._id} className="userslist" onClick={() => handleSwitch(value)}>
+                <div
+                  key={value._id}
+                  className="userslist"
+                  onClick={() => handleSwitch(value)}
+                >
                   <img src={profile} />
                   <div className="userlistdetails">
                     <span>{value.email}</span>
@@ -76,7 +41,7 @@ const UsersChat = () => {
               <img src={profile} />
               <span className="text-white">{current.email}</span>
             </div>
-              <Chat current={current} />
+            <Chat />
           </div>
         ) : (
           <div className="message">

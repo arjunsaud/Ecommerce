@@ -21,6 +21,8 @@ import CustomeService from "../pages/page/CustomeService";
 import About from "../pages/page/About";
 import ProductsByCategory from "../pages/product/ProductsByCategory";
 import UsersChat from "../pages/admin/UsersChat"
+import SocketProvider from "../context/SocketContext";
+import AdminSocketProvider from "../context/AdminSocketContext";
 
 export const Router = createBrowserRouter([
   {
@@ -61,7 +63,13 @@ export const Router = createBrowserRouter([
         },
         {
           path:"/customerservice",
-          element:<CustomeService/>
+          element:<SocketProvider/>,
+          children:[
+            {
+            path:"/customerservice",
+            element:<CustomeService/>
+            }
+          ]
         },
         {
           path:"/about",
@@ -103,7 +111,13 @@ export const Router = createBrowserRouter([
       },
       {
         path:"/admin/customercare",
-        element:<UsersChat/>
+        element:<AdminSocketProvider/>,
+        children:[
+          {
+            path:"/admin/customercare",
+            element:<UsersChat/>,
+          }
+        ]
       }
     ]
   },
