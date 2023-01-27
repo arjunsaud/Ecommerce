@@ -31,13 +31,13 @@ const Products = () => {
   return (
     <Wrapper>
     <Container className="my-4">
-      <h4 className="mb-4">Recommended For You</h4>
+      <h4 className="mb-4">New Arrivals For You</h4>
       <Row>
         {products.length > 0
           ? products.map((value) => {
               return (
-                <Col className="produc"  key={value._id} xs={9} sm={7} md={4} lg={3} xl={2} xxl={2}>
-                  <Card>
+                <Col className="produc"  key={value._id}>
+                  <Card style={{width:"13rem"}}>
                     <Card.Img onClick={()=>viewProduct(value._id)}
                       variant="top"
                       height="150px"

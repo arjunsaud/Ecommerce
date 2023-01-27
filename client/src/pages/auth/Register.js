@@ -101,13 +101,9 @@ const Register = () => {
             />
             <span className="text-danger">{errors.confirmpass}</span>
 
-            <Button primary type="submit" onClick={handleSubmit}>
+            <Button primary type="submit" style={{marginLeft:"25px"}} onClick={handleSubmit}>
               Register
             </Button>
-            <center>Or</center>
-            <Div>
-              <button className="btn btn-primary">Register With Google</button>
-            </Div>
             <hr />
             <center className="mb-4">
               Already Have Account ? <Link to="/login">Login</Link>
@@ -124,7 +120,7 @@ const loginSchema = () =>
     fullname: string().required("Name is Required"),
     address: string().required("Address is Required"),
     phone: string().required("Phone Number is Required").min(10).max(10),
-    email: string().required("Email is Required"),
+    email: string().required("Email is Required").email(),
     password: string().required("Password is Required").min(4).max(32),
     confirmpass: string().when("password", {
       is: (val) => (val && val.length > 0 ? true : false),

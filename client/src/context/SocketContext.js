@@ -24,12 +24,13 @@ const SocketProvider = () => {
 
   const [cid, setCid] = useState();
   useEffect(() => {
-    if (role === "") {
+    if (role === "" || role==="admin") {
       navigate("/login");
     }
-    createconv();
     connectToSocket();
-  }, []);
+    createconv();
+
+  }, [role]);
 
   const connectToSocket = () => {
     const ws = new WebSocket(`ws://localhost:8001?userid=${userid}`);
@@ -58,7 +59,7 @@ const SocketProvider = () => {
   };
 
   return (
-    <SocketContext.Provider value={{message,cid}}>
+    <SocketContext.Provider value={{userid,message,cid}}>
       <Outlet />
     </SocketContext.Provider>
   );

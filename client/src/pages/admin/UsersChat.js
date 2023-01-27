@@ -13,8 +13,8 @@ const UsersChat = () => {
     <div className="mainsec">
       <div className="usersmain">
         <div className="users">
-          <h3 className="m-3">Users</h3>
-          <Search />
+          <h3 className="m-3 text-white">Users</h3>
+          {/* <Search /> */}
           <div className="allusers">
             {clientUsers.map((value) => {
               return (
@@ -23,7 +23,7 @@ const UsersChat = () => {
                   className="userslist"
                   onClick={() => handleSwitch(value)}
                 >
-                  <img src={profile} />
+                  <img src={profile} alt="profile" />
                   <div className="userlistdetails">
                     <span>{value.email}</span>
                     <label style={{ color: "green" }}>Online</label>
@@ -38,7 +38,7 @@ const UsersChat = () => {
           <div className="message">
             <h3 className="m-3 text-white">Messages</h3>
             <div className="user">
-              <img src={profile} />
+              <img src={profile} alt="profile"/>
               <span className="text-white">{current.email}</span>
             </div>
             <Chat />

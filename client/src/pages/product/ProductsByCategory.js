@@ -10,7 +10,7 @@ import { addToCart } from "../../slices/cart.slice";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const ProductsByCategory = () => {
-    const {state}=useLocation()
+  const { state } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,7 +19,9 @@ const ProductsByCategory = () => {
     fetchProducts();
   }, []);
   const fetchProducts = async () => {
-    const { data } = await axios.get(`product/productbycategory/${state.value}`);
+    const { data } = await axios.get(
+      `product/productbycategory/${state.value}`
+    );
     setProducts(data.products);
   };
   const handleAddToCart = (value) => {
@@ -35,21 +37,13 @@ const ProductsByCategory = () => {
         {products.length > 0
           ? products.map((value) => {
               return (
-                <Col
-                  className="produc"
-                  key={value._id}
-                  xs={9}
-                  sm={7}
-                  md={4}
-                  lg={3}
-                  xl={2}
-                  xxl={2}
-                >
-                  <Card>
+                <Col className="produc" key={value._id}>
+                  <Card style={{ width: "13rem" }}>
                     <Card.Img
                       onClick={() => viewProduct(value._id)}
                       variant="top"
-                      src="https://img.freepik.com/free-photo/pink-headphones-wireless-digital-device_53876-96804.jpg"
+                      height="150px"
+                      src={`http://localhost:8000/public/products/${value.image}`}
                     />
                     <Card.Body>
                       <Card.Title onClick={() => viewProduct(value._id)}>

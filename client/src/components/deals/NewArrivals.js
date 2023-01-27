@@ -4,12 +4,13 @@ import Slider from "react-slick";
 import "../../assets/deals.css";
 import sorter from "sort-nested-json";
 import axios from "../../config/axios";
+import Card from "react-bootstrap/Card";
 
 const NewArrivals = () => {
-  const navigate=useNavigate()
-  const goToProduct=()=>{
-    navigate("/products")
-  }
+  const navigate = useNavigate();
+  const goToProduct = () => {
+    navigate("/products");
+  };
   return (
     <section className="NewArrivals background">
       <div className="container">
@@ -18,7 +19,9 @@ const NewArrivals = () => {
             <h4>New Arrivals </h4>
           </div>
           <div className="heading-right row ">
-            <span style={{cursor:"pointer"}} onClick={goToProduct}>View all</span>
+            <span style={{ cursor: "pointer" }} onClick={goToProduct}>
+              View all
+            </span>
           </div>
         </div>
       </div>
@@ -30,7 +33,7 @@ const NewArrivals = () => {
 };
 
 const Cards = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -41,29 +44,20 @@ const Cards = () => {
     setProducts(data);
   };
 
-  const viewProduct=(id)=>{
-    navigate("/product",{state:{id}})
-  }
+  const viewProduct = (id) => {
+    navigate("/product", { state: { id } });
+  };
 
-
-  const sortedproducts=sorter.sort(products).desc("createdAt")
+  const sortedproducts = sorter.sort(products).desc("createdAt");
 
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: products.length<6?products.length:6,
+    slidesToShow: products.length < 6 ? products.length : 6,
     slidesToScroll: 1,
     responsive: [
       {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: products.length<5?products.length:5,
-          slidesToScroll: 1,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 1024,
+        breakpoint: 1400,
         settings: {
           slidesToShow: 4,
           slidesToScroll: 1,
@@ -71,9 +65,25 @@ const Cards = () => {
         },
       },
       {
-        breakpoint: 700,
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 1024,
         settings: {
           slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 750,
+        settings: {
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
         },
@@ -103,17 +113,23 @@ const Cards = () => {
             <div
               onClick={() => viewProduct(value._id)}
               key={value._id}
-              className="catecards m-1 p-1"
+              height="100px"
+              className="catecards m-2 p-1"
             >
-              <div className="bg-success p-1">
-                <img
-                  height="150px"
-                  width="100%"
+              <Card height="100%" style={{width:"13rem"}}>
+                <Card.Img
+                  onClick={() => viewProduct(value._id)}
+                  variant="top"
+                  height="140px"
                   src={`http://localhost:8000/public/products/${value.image}`}
                 />
-                <h5>{value.name}</h5>
-                <label>${value.price}.00</label>
-              </div>
+                <Card.Body>
+                  <Card.Title onClick={() => viewProduct(value._id)}>
+                    {value.name}
+                  </Card.Title>
+                  <label>${value.price}.00</label>
+                </Card.Body>
+              </Card>
             </div>
           );
         })}

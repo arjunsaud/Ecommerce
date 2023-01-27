@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
 import api from "axios";
 import Messages from "./Messages";
 import { BiSend } from "react-icons/bi";
@@ -9,11 +8,7 @@ import { AdminSocketContext } from "../../context/AdminSocketContext";
 const url = "http://localhost:8001/";
 
 const Chat = () => {
-  const { current, setCid } = useContext(AdminSocketContext);
-
-  const { userid } = useSelector((state) => {
-    return state.auth;
-  });
+  const { userid, current, setCid } = useContext(AdminSocketContext);
 
   const createconv = async () => {
     const { data } = await api.get(
@@ -44,11 +39,7 @@ const Chat = () => {
 };
 
 const Send = () => {
-  const { cid ,setMessage} = useContext(AdminSocketContext);
-
-  const { userid } = useSelector((state) => {
-    return state.auth;
-  });
+  const { userid,cid, setMessage } = useContext(AdminSocketContext);
 
   const message = useRef();
 

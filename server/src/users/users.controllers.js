@@ -43,6 +43,35 @@ const UserController = {
       });
     }
   },
+
+  updateUserPassword: async (req, res) => {
+    const { oldpassword, newpassword, id } = req.body;
+    try {
+      const data = await UserService.updateUserPassword(
+        oldpassword,
+        newpassword,
+        id
+      );
+      return res.status(200).json(data);
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
+  },
+  updateUser: async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+    try {
+      const resp = await UserService.updateUser(data, id);
+      return res.status(200).json(resp);
+    } catch (error) {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
+  },
 };
 
-export default UserController
+export default UserController;

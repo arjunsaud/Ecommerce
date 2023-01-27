@@ -29,11 +29,6 @@ wss.on("connection", async (ws, request: any) => {
 
   ws.on("message", (message) => {});
 
-  // const data=socketService.getClient(user.userid)
-  // console.log(data);
-
-  // ws.send(JSON.stringify(messageObj))
-
   ws.on("close", () => {});
 });
 

@@ -1,6 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Head = () => {
+  const navigate=useNavigate()
+  const handleClick=()=>{
+    navigate("/faq")
+  }
   return (
     <div>
       <section className="head">
@@ -11,7 +16,7 @@ const Head = () => {
             <label> support@e_gadget.com</label>
           </div>
           <div className="right cloumn RText">
-            <label>FAQ's</label>
+            <label style={{cursor:"pointer"}} onClick={handleClick}>FAQ's</label>
             <label>Need Help?</label>
           </div>
         </div>

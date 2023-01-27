@@ -14,4 +14,9 @@ userRouter.get("/searchusers",verifyUser,UserController.searchUsers)
 
 userRouter.delete('/deleteuser/:id',verifyUser,UserController.deleteUser)
 
+userRouter.post("/updateuser/:id",UserController.updateUser)
+
+userRouter.put("/updateuserpassword",UserController.updateUserPassword)
+
+
 export default userRouter

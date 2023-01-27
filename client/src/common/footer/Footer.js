@@ -29,17 +29,17 @@ const Footer = () => {
             <h6 className="text-uppercase">Useful Links</h6>
             <ul className="list-unstyled">
               <li>
-                <Link className="footer-link" to="/">
+                <Link className="footer-link" to="/privacypolicy">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link className="footer-link" to="/">
+                <Link className="footer-link" to="/returnpolicy">
                   Return Policy
                 </Link>
               </li>
               <li>
-                <Link className="footer-link" to="/">
+                <Link className="footer-link" to="/faq">
                   FAQ
                 </Link>
               </li>
@@ -81,9 +81,8 @@ const Footer = () => {
       <hr />
       <div className="footer-copyright text-center py-3">
         © 2023 Copyright All Rights Reserved
-        <Link className="link" href="/">
-          {" "}
-          website.com
+        <Link className="link text-white" href="/">
+          egadget.com
         </Link>
       </div>
     </footer>

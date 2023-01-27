@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import axios from "../../config/axios";
 import Table from "react-bootstrap/Table";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const UserLists = () => {
+  const navigate=useNavigate()
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -26,7 +28,10 @@ const UserLists = () => {
     }else{
       toast.warning("Somthing Went Wrong")
     }
+  }
 
+  const handleView=(id)=>{
+    navigate("/admin/buy",{state:{id}})
   }
 
   return (
@@ -57,7 +62,8 @@ const UserLists = () => {
                     <td>{value.address}</td>
                     <td>{value.phone}</td>
                     <td>
-                      <button className="btn btn-danger" onClick={()=>handleDelete(value._id)}>Delete</button>
+                      <button className="btn btn-danger mx-1" onClick={()=>handleDelete(value._id)}>Delete</button>
+                      <button className="btn btn-info" onClick={()=>handleView(value._id)}>List Buy</button>
                     </td>
                   </tr>
                 );

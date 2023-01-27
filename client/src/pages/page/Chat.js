@@ -9,11 +9,7 @@ import { SocketContext } from "../../context/SocketContext";
 const url = "http://localhost:8001/";
 
 const Chat = () => {
-  const { message, cid } = useContext(SocketContext);
-
-  const { userid } = useSelector((state) => {
-    return state.auth;
-  });
+  const {userid, message, cid } = useContext(SocketContext);
 
   const [chats, setChats] = useState([]);
 
@@ -33,6 +29,12 @@ const Chat = () => {
       setChats(data.message);
     }
   };
+
+  const scrollRef=useRef(null)
+
+  useEffect(()=>{
+    scrollRef.current.scrollIntoView({behavior:'smooth'})
+  },[chats])
 
   return (
     <div className="chat">
@@ -58,7 +60,9 @@ const Chat = () => {
                 </div>
               );
             })
-          : "Loading"}
+          :<center className="text-primary">Start Messaging...</center> 
+          }
+          <div   ref={scrollRef} />
       </div>
       <Send cid={cid} setChats={setChats} />
     </div>
@@ -96,7 +100,7 @@ const Send = ({ cid, setChats }) => {
         placeholder="Type Message Here..."
       />
       <div className="input-group-append">
-        <button onClick={handleSend} className="input-group-text bg-primary">
+        <button onClick={handleSend} className="input-group-text text-white bg-primary">
           send
         </button>
       </div>
@@ -108,7 +112,7 @@ const Profile = () => {
   return (
     <div className="profilesection">
       <img width="50px" src={profile} alt="profile" />
-      <div className="topsection">
+      <div className="topsection text-white">
         <label>Customer Service User</label>
         <span>Customer Support</span>
       </div>

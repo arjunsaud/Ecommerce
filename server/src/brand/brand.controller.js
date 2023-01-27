@@ -22,16 +22,24 @@ const BrandController = {
         });
       }
     } catch (error) {
-      throw error;
+      return res.status(400).json({
+        message: error.message,
+      });
     }
   },
 
   deleteBrand: async (req, res) => {
-    const id = req.params;
-    const brand = await BrandService.deleteBrand(id);
-    return res.status(200).json({
-      brand,
-    });
+    try {
+      const id = req.params;
+      const brand = await BrandService.deleteBrand(id);
+      return res.status(200).json({
+        brand,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
   },
 };
 

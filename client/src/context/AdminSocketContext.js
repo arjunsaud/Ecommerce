@@ -53,7 +53,7 @@ const AdminSocketProvider = () => {
     
     
   return (
-    <AdminSocketContext.Provider value={{message,setMessage,handleSwitch,current,clientUsers,setCid,cid}}>
+    <AdminSocketContext.Provider value={{userid,message,setMessage,handleSwitch,current,clientUsers,setCid,cid}}>
       <Outlet />
     </AdminSocketContext.Provider>)
 }

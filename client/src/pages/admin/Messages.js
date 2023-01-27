@@ -1,17 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import profile from "../../assets/profile.jpg";
 import api from "axios";
-import { useSelector } from "react-redux";
 import { AdminSocketContext } from "../../context/AdminSocketContext";
 
 const url = "http://localhost:8001/";
 
 const Messages = () => {
-  const { cid, message } = useContext(AdminSocketContext);
-
-  const { userid } = useSelector((state) => {
-    return state.auth;
-  });
+  const {userid, cid, message } = useContext(AdminSocketContext);
 
   const [chats, setChats] = useState([]);
   useEffect(() => {
@@ -30,6 +25,12 @@ const Messages = () => {
       setChats(data.message);
     }
   };
+
+  const scrollRef=useRef(null)
+
+  useEffect(()=>{
+    scrollRef.current.scrollIntoView({behavior:'smooth'})
+  },[chats])
 
   return (
     <div>
@@ -56,6 +57,7 @@ const Messages = () => {
       ) : (
         <span className="text-white">No Messages Yet</span>
       )}
+      <div ref={scrollRef} />
     </div>
   );
 };

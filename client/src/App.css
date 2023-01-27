@@ -48,12 +48,7 @@ li {
 
 
 /*---------category----------*/
-.contentWidth {
-  width: 77%;
-}
-.slider{
-  height: 360px;
-}
+
 .category {
   box-shadow: rgb(43 52 69 / 10%) 0px 4px 16px;
   background-color: #fff;

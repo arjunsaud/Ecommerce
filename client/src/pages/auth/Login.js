@@ -10,7 +10,7 @@ import axios from "../../config/axios";
 import { useDispatch } from "react-redux";
 import { setAuthDetails } from "../../slices/auth.slice";
 import { setChatDetails } from "../../slices/chat.slice";
-
+import { toast } from "react-toastify";
 
 const url = "http://localhost:8001/";
 
@@ -33,21 +33,20 @@ const Login = () => {
           email: response.data.data.user.email,
           role: response.data.data.user.role,
         });
-      }
-      const user = {
-        email: response.data.data.user.email,
-        bearer_token: response.data.data.token,
-        refresh_token: response.data.data.refreshToken,
-        role: response.data.data.user.role,
-        userid: response.data.data.user._id,
-      };
-      dispatch(setAuthDetails(user));
-      if (response.status === 200) {
+
+        const user = {
+          email: response.data.data.user.email,
+          bearer_token: response.data.data.token,
+          refresh_token: response.data.data.refreshToken,
+          role: response.data.data.user.role,
+          userid: response.data.data.user._id,
+        };
+        dispatch(setAuthDetails(user));
         if (response.data.data.user.role === "admin") {
           navigate("/admin");
         } else {
-          const {data} = await api.get(url + "user/customersupport");
-          dispatch(setChatDetails({adminuser:data.user.userid}))
+          const { data } = await api.get(url + "user/customersupport");
+          dispatch(setChatDetails({ adminuser: data.user.userid }));
           navigate("/");
         }
       }
@@ -81,17 +80,20 @@ const Login = () => {
             />
             <span className="text-danger">{errors.password}</span>
 
-            <Button type="submit" onClick={handleSubmit}>
+            <Button
+              type="submit"
+              style={{ marginLeft: "25px" }}
+              onClick={handleSubmit}
+            >
               Login
             </Button>
           </Form>
-          <center>Or</center>
-          <Div>
-            <button className="btn btn-primary">Login With Google</button>
-          </Div>
-          <hr />
           <center>
             Don't Have Account ? <Link to="/register">Register</Link>
+          </center>
+          <center>Or</center>
+          <center>
+            <Link to="/forgetpassword">Forget Password ?</Link>
           </center>
         </Div>
       </Div>
@@ -101,7 +103,7 @@ const Login = () => {
 
 const loginSchema = () =>
   object({
-    email: string().required("Email is Required"),
+    email: string().required("Email is Required").email(),
     password: string().required("Password is Required").min(4).max(32),
   });
 

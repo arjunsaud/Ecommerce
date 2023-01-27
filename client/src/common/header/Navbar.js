@@ -4,28 +4,27 @@ import { CgClose } from "react-icons/cg";
 import { FiMenu } from "react-icons/fi";
 
 const Navbar = () => {
-  const [MobileMenu, setMobileMenu] = useState(false);
+  const [mobileMenu, setMobileMenu] = useState(false);
 
   return (
     <header className="header">
       <div className="container hamburger">
-        <Link className="toggle" onClick={() => setMobileMenu(!MobileMenu)}>
-          {MobileMenu ? (
-            <CgClose className="close" />
+        <div className="toggle" onClick={() => setMobileMenu(!mobileMenu)}>
+          {mobileMenu ? (
+            <CgClose color="red" className="close" />
           ) : (
-            <FiMenu className="open" />
+            <FiMenu color="black" className="open" />
           )}
-        </Link>
+        </div>
         <div
           className={
-            MobileMenu ? "nav-links-mobile" : "links f_flex capitalize"
+            mobileMenu ? "nav-links-mobile" : "links f_flex capitalize"
           }
           onClick={() => setMobileMenu(false)}
         >
           <Link className="link" to="/">
             home
           </Link>
-
           <Link className="link" to="/customerservice">
             customer service
           </Link>
@@ -35,6 +34,10 @@ const Navbar = () => {
           <Link className="link" to="/about">
             about
           </Link>
+          <Link className="link" to="/shop">
+            My Shop
+          </Link>
+
         </div>
       </div>
     </header>

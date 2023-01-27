@@ -13,9 +13,7 @@ const Search = () => {
   const dispatch=useDispatch()
   const { query } = useContext(GlobalContext);
   const navigate=useNavigate()
-
   const [results, setResults] = useState([]);
-
 
   const handleAddToCart=(value)=>{
     dispatch(addToCart(value))
@@ -41,43 +39,14 @@ const Search = () => {
         </h5>
       </div>
       <div className="searchSection">
-        {/* <div>
-          {results.length > 0
-            ? results.map((value) => {
-                return (
-                  <div key={value._id} className="productlists">
-                    <div className="product">
-                      <div className="productimage">
-                        <img
-                          src="https://img.freepik.com/free-photo/pink-headphones-wireless-digital-device_53876-96804.jpg"
-                          alt="productimg"
-                        />
-                      </div>
-                      <div className="productdeatils">
-                        <h5>{value.name}</h5>
-                        <span>${value.price}</span>
-                        <div className="buttonsection">
-                          <button className="buy">Buy</button>
-                          <button className="addtocart">Add to Cart</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })
-            : "No Match Found"}
-        </div> */}
-
         <Row>
           {results.length > 0
             ? results.map((value) => {
                 return (
                   <Col
                     className="produc"
-                    key={value._id}
-                    xs={2} sm={7} md={4} lg={3} xl={2} xxl={6}
-                  >
-                    <Card height="100%">
+                    key={value._id}>
+                    <Card height="100%" style={{width:"14rem"}}>
                       <Card.Img
                         onClick={() => viewProduct(value._id)}
                         variant="top"

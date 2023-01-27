@@ -37,38 +37,84 @@ const AuthController = {
   },
 
   me: async (req, res) => {
-    const { user } = req;
-    return res.status(200).json({
-      user,
-    });
+    try {
+      const { user } = req;
+      return res.status(200).json({
+        user,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
+  },
+
+  countTotal: async (req, res) => {
+    try {
+      const data = await AuthService.countAll();
+      return res.status(200).json(
+        data
+      );
+    } catch (error) {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
   },
 
   userme: async (req, res) => {
     try {
       const { user } = req;
-      if(user.role==="user"){
+      if (user.role === "user") {
         return res.status(200).json({
-          user
+          user,
         });
-      }else{
+      } else {
         return res.status(201).json({
-          message:"Not Logged In"
-      })
+          message: "Not Logged In",
+        });
       }
     } catch (error) {
-      throw error
+      return res.status(400).json({
+        message: error.message,
+      });
     }
   },
 
   refresh_token: (req, res) => {
-    const { token, refreshToken } = req.tokens;
-    return res.status(200).json({
-      token,
-      refreshToken,
-    });
+    try {
+      const { token, refreshToken } = req.tokens;
+      return res.status(200).json({
+        token,
+        refreshToken,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
   },
-  updatedetails: (req, res) => {
-    
+
+  changepassword: async (req, res) => {
+    const { password, token } = req.body;
+    try {
+      const data = await AuthService.changePassword(password, token);
+      return res.status(200).json(data);
+    } catch (error) {
+      return res.status(400).json(error.message);
+    }
+  },
+
+  forgetpassword: async (req, res) => {
+    const { email } = req.body;
+    try {
+      const data = await AuthService.checkUserAndSendEmail(email);
+      return res.status(200).json({
+        message: "Link Sent",
+      });
+    } catch (error) {
+      return res.status(400).json(error.message);
+    }
   },
 };
 

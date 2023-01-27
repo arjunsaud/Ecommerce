@@ -27,11 +27,11 @@
   }
 }
 .summary{
-  background-color: rgb(34, 34, 34);
+  background-color: rgb(223, 223, 223);
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
   padding: 4vh;
-  color: rgb(65, 65, 65);
+  color: rgb(0, 0, 0);
 }
 @media(max-width:768px){
   .summary{

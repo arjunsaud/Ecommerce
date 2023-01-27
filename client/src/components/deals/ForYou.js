@@ -25,9 +25,16 @@ const ForYou = () => {
   const handleAddToCart=(value)=>{
     dispatch(addToCart(value))
   }
+
+  const handleGoBuy=(value)=>{
+    dispatch(addToCart(value))
+    navigate("/cart")
+  }
+
   const viewProduct=(id)=>{
     navigate("/product",{state:{id}})
   }
+
   return (
     <Container className="my-4">
       <h4 className="mb-4">Recommended For You</h4>
@@ -35,8 +42,8 @@ const ForYou = () => {
         {products.length > 0
           ? products.map((value) => {
               return (
-                <Col className="produc"  key={value._id} xs={9} sm={7} md={4} lg={3} xl={2} xxl={2}>
-                  <Card height="100%">
+                <Col className="produc"  key={value._id}>
+                  <Card height="100%" style={{width:"13rem"}}>
                     <Card.Img onClick={()=>viewProduct(value._id)}
                       variant="top"
                       height="150px"
@@ -45,7 +52,7 @@ const ForYou = () => {
                     <Card.Body>
                       <Card.Title onClick={()=>viewProduct(value._id)}>{value.name}</Card.Title>
                       <div className="cardSection">
-                        <span>Buy</span>
+                        <span onClick={()=>handleGoBuy(value)}>Buy</span>
                         <span className="mx-2" onClick={()=>handleAddToCart(value)}>Add</span>
                       </div>
                     </Card.Body>

@@ -56,20 +56,19 @@ const Search = () => {
   return (
     <section className="search">
       <div className="container topbar">
-        <div className="logo" onClick={handleClick} style={{cursor:"pointer"}}>
-          <span>E-Gadget</span>
+        <div className="logo w-100" onClick={handleClick} style={{cursor:"pointer"}}>
+          <span>e-Gadget</span>
         </div>
-        <div className="search-box">
+        <div className="search-box w-100">
           <InputGroup className="searchbox mt-1">
-            <InputGroup.Text>All Category</InputGroup.Text>
-            <Form.Control className="searchinput" onChange={(e)=>setSquery(e.target.value)} required  name="search" value={squery} placeholder="Search here" />
+            <Form.Control className="searchinput" onChange={(e)=>setSquery(e.target.value)} required  name="search" value={squery} placeholder="Search Product here" />
             <InputGroup.Text className="searchbtn" onClick={handleSearch}>
               <GoSearch />
             </InputGroup.Text>
           </InputGroup>
         </div>
         {isLogged ? (
-          <div className="icon">
+          <div className="icon w-100">
             <span onClick={goToPofile} style={{cursor:"pointer"}}>
               <CgProfile />
             </span>
@@ -82,7 +81,7 @@ const Search = () => {
             </span>
           </div>
         ) : (
-          <div className="authbutton">
+          <div className="authbutton w-100">
             <Button
               className="bg-primary"
               onClick={() => navigate("/login", { replace: false })}

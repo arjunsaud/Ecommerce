@@ -53,14 +53,12 @@ const Contact = () => {
 const Wrapper=styled.section`
 .wrapper {
   height: 100vh;
-  background: #000;
+  background: linear-gradient(90deg, rgba(30,24,130,1) 0%, rgba(196,29,145,1) 35%, rgba(31,165,193,1) 100%);
   width: 100%
 }
 
 .overlay {
   width: 100%;
-  background: red;
-  background: linear-gradient(90deg, rgba(30,24,130,1) 0%, rgba(196,29,145,1) 35%, rgba(31,165,193,1) 100%);
 }
 
 .contact-us {

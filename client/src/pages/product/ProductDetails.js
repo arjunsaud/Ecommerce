@@ -4,16 +4,17 @@ import axios from "../../config/axios";
 import { useLocation } from "react-router-dom";
 import { addToCart } from "../../slices/cart.slice";
 import { useDispatch } from "react-redux";
+import StarRatings from "react-star-ratings";
+import ListGroup from "react-bootstrap/ListGroup";
 
 const ProductDetails = () => {
   const { state } = useLocation();
   const [product, setProduct] = useState([]);
   const dispatch = useDispatch();
 
-
-  const handleAddToCart=(value)=>{
-    dispatch(addToCart(value))
-  }
+  const handleAddToCart = (value) => {
+    dispatch(addToCart(value));
+  };
   useEffect(() => {
     fetchProduct();
   }, []);
@@ -22,7 +23,6 @@ const ProductDetails = () => {
     const { data } = await axios.get(`product/getproduct/${state.id}`);
     setProduct(data.product);
   };
-
   return (
     <Wrapper>
       <div className="app">
@@ -34,29 +34,88 @@ const ProductDetails = () => {
                 alt=""
               />
             </div>
-
             <div className="box">
               <div className="row">
                 <h2>{value.name}</h2>
                 <span>${value.price}</span>
-                <label><label className="text-muted">Brand :</label> <span className="text-white">{value.brand}</span></label>
-                <label><label className="text-muted">Model :</label> <span className="text-white">{value.model}</span></label>
-                <label><label className="text-muted">Category :</label> <span className="text-white">{value.category}</span></label>
+                <label>
+                  <label className="text-muted">Brand :</label>
+                  <span className="text-white">{value.brand}</span>
+                </label>
+                <label>
+                  <label className="text-muted">Model :</label>
+                  <span className="text-white">{value.model}</span>
+                </label>
+                <label>
+                  <label className="text-muted">Category :</label>
+                  <span className="text-white">{value.category}</span>
+                </label>
               </div>
               <h5 className="text-muted">Images</h5>
               <DetailsThumb image={value.image} />
               <button className="btn btn-danger">Buy</button>
-              <button className="btn btn-info mx-2" onClick={()=>handleAddToCart(value)}>Add to cart</button>
-
+              <button
+                className="btn btn-info mx-2"
+                onClick={() => handleAddToCart(value)}
+              >
+                Add to cart
+              </button>
             </div>
           </div>
         ))}
+      </div>
+      <div className="container comment">
+        <h3>User Reviews</h3>
+        {state.id ? <Reviews id={state.id} /> : <></>}
       </div>
     </Wrapper>
   );
 };
 
 export default ProductDetails;
+
+const Reviews = ({ id }) => {
+  const [reviews, setReviews] = useState([]);
+  useEffect(() => {
+    fetchProduct();
+  }, [id]);
+
+  const fetchProduct = async () => {
+    if (id) {
+      const { data } = await axios.get(`review/getreview/${id}`);
+      setReviews(data.user);
+    }
+  };
+  return (
+    <>
+      <ListGroup>
+        {reviews.length > 0
+          ? reviews.map((value) => {
+              return (
+                <ListGroup.Item key={value._id}>
+                  <div className="review h-auto">
+                    <div className="topsection">
+                      <label>{value.userid.fullname}</label>
+                      <StarRatings
+                        starDimension="18px"
+                        starSpacing="0px"
+                        starRatedColor="yellow"
+                        rating={value.rating}
+                        numberOfStars={5}
+                      />
+                      <span className="mt-2" style={{ lineHeight: "1.2" }}>
+                        {value.comment}
+                      </span>
+                    </div>
+                  </div>
+                </ListGroup.Item>
+              );
+            })
+          : "No Reviews Yet"}
+      </ListGroup>
+    </>
+  );
+};
 
 const DetailsThumb = ({ image }) => {
   return (
@@ -67,16 +126,38 @@ const DetailsThumb = ({ image }) => {
 };
 
 const Wrapper = styled.section`
+  .username {
+    font-size: 20px;
+  }
   .app {
     max-width: 1200px;
     width: 100%;
-    margin: 100px auto;
-    background: linear-gradient(90deg, rgba(157,25,159,1) 0%, rgba(113,4,73,1) 35%, rgba(6,67,120,1) 100%);   .details {
+    margin: 10px auto;
+    background: linear-gradient(
+      90deg,
+      rgba(157, 25, 159, 1) 0%,
+      rgba(113, 4, 73, 1) 35%,
+      rgba(6, 67, 120, 1) 100%
+    );
+  }
+
+  .details {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     padding: 30px 0;
   }
+
+  .comment {
+    max-width: 1200px;
+    width: 100%;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    flex-wrap: wrap;
+  }
+
   .details .big-img {
     max-width: 500px;
     min-width: 290px;
@@ -104,7 +185,7 @@ const Wrapper = styled.section`
   .box .row h2 {
     text-transform: uppercase;
     letter-spacing: 2px;
-    color:white;
+    color: white;
   }
   .box .row span {
     color: crimson;

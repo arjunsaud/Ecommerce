@@ -3,6 +3,8 @@ import { Navigate, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "../../assets/deals.css"
 import axios from "../../config/axios"
+import Card from "react-bootstrap/Card";
+
 
 const TopCategories = () => {
   return (
@@ -40,18 +42,10 @@ const Cards = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 6,
-    slidesToScroll: 6,
+    slidesToScroll: 1,
     responsive: [
       {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 1,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 1024,
+        breakpoint: 1400,
         settings: {
           slidesToShow: 4,
           slidesToScroll: 1,
@@ -59,9 +53,25 @@ const Cards = () => {
         },
       },
       {
-        breakpoint: 700,
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 1024,
         settings: {
           slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 750,
+        settings: {
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
         },
@@ -91,14 +101,20 @@ const Cards = () => {
       <Slider {...settings}>
         {category.map((value) => {
           return (
-            <div onClick={()=>goToProductbyCateogry(value.category)} key={value._id} className="catecards m-1 p-1">
-              <div className="bg-info p-1">
-                <img height="150px"
-                  width="100%"
+            <div onClick={()=>goToProductbyCateogry(value.category)} key={value._id} className="catecards m-2 p-1">
+              <Card height="100%" style={{width:"12rem"}}>
+                <Card.Img
+                  variant="top"
+                  height="140px"
                   src={`http://localhost:8000/public/category/${value.image}`}
                 />
-                <center><span className="text-dark" style={{fontSize:"20px"}}>{value.category}</span></center>
-              </div>
+                <Card.Body>
+                  <Card.Title>
+                    {value.name}
+                  </Card.Title>
+                  <label>{value.category}</label>
+                </Card.Body>
+              </Card>
             </div>
           );
         })}

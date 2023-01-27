@@ -19,8 +19,8 @@ const Categories = () => {
     navigate("/productsbycategory", { state: { value } });
   };
   return (
-    <div className="category m-2">
-      <span className="box f_flex h5">All Categories</span>
+    <div className="category m-4">
+      <span className="mx-4 f_flex h5">Categories</span>
       {category.length > 0 ? (
         category.map((value) => {
           return (

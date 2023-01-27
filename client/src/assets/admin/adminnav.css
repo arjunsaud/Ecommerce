@@ -6,11 +6,19 @@
 .sideham{
     display: none;
 }
-.topbar{
-    background-color: rgb(36, 61, 78);
+.topbars{
+    display: flex;
+    padding: 5px;
+    flex-direction: row;
+    background-color: rgb(5, 89, 145);
 }
 .sidelogo{
     flex-grow: 0.9;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+.sidelogo:hover{
     color: white;
 }
 .sidemenu{
@@ -18,7 +26,7 @@
     flex-direction: row;
 }
 .sidemenulist{
-    background-color: rgb(56, 20, 54);
+    background-color: rgb(42, 42, 43);
     height: 100vh;
     display: flex;
     width: fit-content;
@@ -30,8 +38,36 @@
 .asidemenulink{
     text-decoration: none;
     color: white;
-    margin-left: 20px;
-    margin-right: 20px;
-    padding: 5px;
+    margin-top: 3px;
+    padding: 7px;
     font-size: 20px;
+}
+.asidemenulink:hover{
+    background-color: rgb(15, 15, 15);
+}
+
+.sidemenulistmobile{
+    background-color: rgb(42, 42, 43);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: white;
+    height: 100vh;
+    font-size: 20px;
+}
+
+@media screen and (max-width:900px) {
+
+    .sideham{
+        font-size: 30px;
+        margin-left: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+        color: black;
+        display: block;
+    }
+    .sidemenulist{
+        display: none;
+    }
+
 }

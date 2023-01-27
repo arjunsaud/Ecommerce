@@ -1,0 +1,21 @@
+.contentWidth {
+    width: 77%;
+  }
+  .slider{
+    height: 360px;
+  }
+
+.offer_slider{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+  }
+  
+  @media(max-width:992px){
+    .offer_card p{
+        height: 160px;
+        overflow: hidden;
+    }
+  }
